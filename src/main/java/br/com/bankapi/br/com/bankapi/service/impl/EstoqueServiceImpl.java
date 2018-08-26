@@ -41,6 +41,20 @@ public class EstoqueServiceImpl implements EstoqueService {
     }
 
     @Override
+    public QuantidadeNotaTO obterEstoqueNota(String valor) throws EstoqueNotaException {
+        QuantidadeNotaTO notaTO = new QuantidadeNotaTO();
+
+        try {
+            short valorNota = Short.parseShort(valor);
+            EstoqueNota estoqueNotaBanco = estoqueNotaRepository.obterEstoqueNota(valorNota);
+            notaTO = ConverterUtil.toQuantidadeNotaTO(estoqueNotaBanco);
+            return notaTO;
+        } catch (Exception e ) {
+            throw new EstoqueNotaException("Não foi possivel obter o estoque da nota informada");
+        }
+    }
+
+    @Override
     public List<QuantidadeNotaTO> obterEstoqueNotas() throws EstoqueNotaException {
         List<QuantidadeNotaTO> retorno = new ArrayList<>();
 

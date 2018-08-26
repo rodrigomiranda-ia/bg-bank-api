@@ -13,4 +13,7 @@ public interface EstoqueNotaRepository extends JpaRepository<EstoqueNota, Short>
 
     @Query("FROM EstoqueNota e where e.quantidade > 0 order by e.valorNota desc")
     public List<EstoqueNota> obterNotasDisponiveisParaSaque();
+
+    @Query("FROM EstoqueNota e where e.valorNota = :valor")
+    public EstoqueNota obterEstoqueNota(@Param("valor") short valor);
 }

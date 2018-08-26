@@ -17,6 +17,8 @@ public interface EstoqueService {
 
     public void excluirEstoqueNota(QuantidadeNotaTO estoqueNota);
 
+    public QuantidadeNotaTO obterEstoqueNota(String valor) throws EstoqueNotaException;
+
     public List<QuantidadeNotaTO> obterEstoqueNotas() throws EstoqueNotaException;
 
     public List<QuantidadeNotaTO> obterNotasDisponiveisParaSaque() throws EstoqueNotaException;
