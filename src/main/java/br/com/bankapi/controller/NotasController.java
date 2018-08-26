@@ -31,8 +31,8 @@ public class NotasController {
         return new ResponseEntity<Response>(Response.montarResposta(estoqueNotas, null), HttpStatus.OK);
     }
 
-    @GetMapping(URL_BASE)
-    public ResponseEntity<Response> getNota(@RequestParam("valor") String valor) {
+    @GetMapping(URL_BASE + "/{valor}")
+    public ResponseEntity<Response> getNota(@PathVariable("valor") String valor) {
         QuantidadeNotaTO estoqueNota = new QuantidadeNotaTO();
         try {
             estoqueNota = estoqueService.obterEstoqueNota(valor);
