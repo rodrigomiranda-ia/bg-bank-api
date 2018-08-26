@@ -19,6 +19,16 @@ group = 'br.com.config'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
+
+task copyToLib(type: Copy) {
+    into "$buildDir/lib"
+    from(configurations.compile)
+}
+
+stage.dependsOn(copyToLib)
+
 repositories {
 	mavenCentral()
 }
