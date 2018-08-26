@@ -51,4 +51,15 @@ public class NotasController {
         }
         return new ResponseEntity<String>("Nota salva com sucesso", HttpStatus.CREATED);
     }
+
+    @DeleteMapping(URL_BASE + "/{valor}")
+    public ResponseEntity<String> excluirNota(@PathVariable("valor") String valor) {
+        try {
+            QuantidadeNotaTO notaTO = estoqueService.obterEstoqueNota(valor);
+            estoqueService.excluirEstoqueNota(notaTO);
+        } catch (EstoqueNotaException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>("Nota excluida com sucesso", HttpStatus.OK);
+    }
 }
