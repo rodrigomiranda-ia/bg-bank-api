@@ -40,11 +40,7 @@ dependencies {
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
-jar {
-	enabled = true
-}
-
 bootJar {
-	launchScript()
+	mainClassName = 'br.com.bankapi.config.BankApiApplication'
 }
 
