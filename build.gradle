@@ -14,6 +14,8 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
 
 group = 'br.com.config'
 version = '0.0.1-SNAPSHOT'
@@ -44,3 +46,28 @@ bootJar {
 	mainClassName = 'br.com.bankapi.config.BankApiApplication'
 }
 
+checkstyle {
+    toolVersion '7.8.1'
+    configFile file("config/checkstyle/checkstyle.xml")
+}
+checkstyleMain {
+    source ='src/main/java'
+}
+checkstyleTest {
+    source ='src/test/java'
+}
+
+findbugs {
+    ignoreFailures = false
+    toolVersion = "3.0.1"
+    sourceSets=[sourceSets.main]
+    excludeFilter = file("config/findbugs/excludeFilter.xml")
+    reportsDir = file("$project.buildDir/reports/findbugs")
+    effort = "max"
+}
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
